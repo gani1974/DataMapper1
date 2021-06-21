@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class App {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
@@ -27,6 +29,18 @@ public class App {
             int idPersonFound = 2;
             Person personFound = personMapper.findById(idPersonFound);
             System.out.println("Person with id " + idPersonFound + " is: " + personFound.getFirstName() + " " + personFound.getLastName());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        //Getting all persons from DB into Identity Map
+        try{
+            Map <Integer, Person> personMap = new HashMap<>();
+            for(int i=1;i<=3;i++){
+                Person person = personMapper.findById(i);
+                personMap.put(person.getIdPerson(),person);
+            }
+            System.out.println("stop");
         } catch (SQLException e) {
             e.printStackTrace();
         }
